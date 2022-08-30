@@ -27,9 +27,7 @@ They are . folder in this repository
 2. DjangoWeb 
     - staring project folder
     - including **manage.py pythonfile**
-        - **manage.py pythonfile** is for interact with the project
-        <details open>
-        <summary> such as</summary>
+        - **manage.py pythonfile** is for interact with the project<details open><summary> such as</summary>
         * runserver
         * startapp
         * makemigrates
@@ -55,7 +53,7 @@ They are . folder in this repository
         1. \__init__.py
         2. admin.py
         3. apps.py
-        4. migrations/
+        4. migrations
             - update migration 
             1. \__init__.py
         5. models.py
@@ -71,5 +69,6 @@ They are . folder in this repository
 
 
 [GitHub repo url](https://github.com/CN331G2/cn331-as2.git) 
+
 [Vedio link]()
 
