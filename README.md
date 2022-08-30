@@ -27,13 +27,17 @@ They are . folder in this repository
 2. DjangoWeb 
     - staring project folder
     - including **manage.py pythonfile**
-        - **manage.py pythonfile** is for interact with the project<details open><summary> such as</summary>
+        - **manage.py pythonfile** is for interact with the project
+        <details open>
+        <summary> such as</summary>
+
         * runserver
         * startapp
         * makemigrates
         * migrate
         * shell
         * createsupperuser
+        
         </details>
 
     1. DjangoWeb
