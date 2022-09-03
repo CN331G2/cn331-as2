@@ -1,0 +1,13 @@
+{% extends 'students/layout.html' %}
+{% block body %}
+
+<h1>Students List:</h1>
+<ul>
+    {% for student in students %}
+    <li>{{ student }}</li>
+    {% empty %}
+    <li>No students.</li>
+
+    {% endfor %}
+</ul>
+{% endblock %}
