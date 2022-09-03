@@ -15,7 +15,7 @@ Assignment #2 - Create Django Web App
 >> |    Name         |  Student ID  |
 >> |-----------------|--------------|
 >> |  ศุภกฤต นืธิเกตุกุล  |  6410615139  |
->> |                  |              |
+>> |  ณธิพร จันทร์เพ็ชร  |  6410615030  |
 
 ### System ability
 They are . folder in this repository
