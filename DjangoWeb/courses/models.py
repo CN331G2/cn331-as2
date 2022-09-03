@@ -3,13 +3,6 @@ from django.db import models
 import courses
 
 # Create your models here.
-class W_quota(models.Model):
-    code = models.CharField(max_length=5)
-    name = models.CharField(max_length=64)
-    semester = models.CharField(max_length=1)
-    year = models.IntegerField()
-    seat = models.IntegerField()
-    quota = models.IntegerField(default= False)
 
 class Course(models.Model):
     code = models.CharField(max_length=5)
@@ -17,8 +10,8 @@ class Course(models.Model):
     semester = models.CharField(max_length=1)
     year = models.IntegerField()
     seat = models.IntegerField()
-    quota = models.ForeignKey(W_quota, on_delete=models.CASCADE)
+    quota = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.id}:{self.code}:{self.name}:{self.semester}:{self.year}:{self.seat}:{self.quota}"
+        return f"{self.id} code:{self.code} name:{self.name} semmester:{self.semester} year:{self.year} seat:{self.seat} quota:{self.quota}"
 
