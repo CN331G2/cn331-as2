@@ -12,25 +12,31 @@
 
 </ul>
 
-<h2>Class Attendance.</h2>
-<ul>
-    {% for attendance in attendences %}
-        <li>{{ attendance }}</li>
-    {% empty %}
-        <li>No attendances.</li>
-    {% endfor %}
-</ul>
+{% if user.is_staff %}
+<p1><b> Admin Interface </b></p1>
+<div class="table" align="center">
+    <table>
+        <tr>
+            <th>Student List</th>
+        </tr>
+        {% for attendance in course.attendance.all %}
+        <td>{{ attendance }}</td>
+        {% endfor %}
+
+    </table>
+</div>
+{% endif %}
 
 <h2>Register</h2>
 <form action="{% url 'book' course.id %}" method="POST">
     {% csrf_token %}
-    <select name="passenger">
-        {% for passenger in non_passengers %}
-            <option value="{{ passenger.id }}">{{ passenger }}</option>
+    <select name="attendance">
+        {% for pafwjker in non_pneifns %}
+        <option value="{{ attendance.id }}">{{ attendance }}</option>
         {% endfor %}
     </select>
-    <input type="submit" value="Add Passenger">
+    <input type="submit" value="Add Attendance">
 </form>
 
-<a href="{% url 'index' %}">Back to Flight List</a>
+<a href="{% url 'index' %}">Back to Course List</a>
 {% endblock %}
