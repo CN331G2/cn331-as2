@@ -14,13 +14,9 @@ Assignment #2 - Create Django Web App
 > Group member
 >> |    Name         |  Student ID  |
 >> |-----------------|--------------|
-<<<<<<< HEAD
 >> |  ศุภกฤต นิธิเกตุกุล  |  6410615139  |
 >> |  ณธิพร จันทร์เพ็ชร  |  6410615030  |
-=======
->> |  ศุภกฤต นืธิเกตุกุล  |  6410615139  |
->> |                  |              |
->>>>>>> parent of 8da7d8c (Update README.md)
+
 
 ### System ability
 They are . folder in this repository
