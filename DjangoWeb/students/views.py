@@ -6,11 +6,13 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
+
 def index(request):
-    # if not request.student.is_authenticated :
-    #     return HttpResponseRedirect(reverse('login'))
-    # else:
-        return render(request, 'students/index.html')
+    c = {}
+    if not request.user.is_authenticated :
+        return HttpResponseRedirect(reverse('login'))
+    else:
+        return render(request, 'students/index.html', c)
 
 def login_view(request):
     if request.method == "POST":
