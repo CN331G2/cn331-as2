@@ -1,13 +1,10 @@
 {% extends 'students/layout.html' %}
 {% block body %}
-
-<h1>Students List:</h1>
+<h1>Welcome, {{ request.student.first_name }}</h1>
 <ul>
-    {% for student in students %}
-    <li>{{ student }}</li>
-    {% empty %}
-    <li>No students.</li>
-
-    {% endfor %}
+    <li>Username: {{ request.student.username }}</li>
+    <li>Email: {{ request.student.email }}</li>
 </ul>
+
+<a href="{% url 'logout' %}">Log out</a>
 {% endblock %}
