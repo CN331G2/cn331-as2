@@ -7,9 +7,9 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def index(request):
-    if not request.student.is_authenticated :
-        return HttpResponseRedirect(reverse('login'))
-    else:
+    # if not request.student.is_authenticated :
+    #     return HttpResponseRedirect(reverse('login'))
+    # else:
         return render(request, 'students/index.html')
 
 def login_view(request):

@@ -1,3 +1,4 @@
+import pkgutil
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -11,17 +12,17 @@ def index(request) :
         'courses': Course.objects.all()
     })
 
-def attendance(request, attendance_id):
-    course = Course.objects.get(pk=course_id)
+def course(request, c_id):
+    course = Course.objects.get(pk=c_id)
     return render(request, "courses/course.html", {
-        "flight": course,
-        "passengers": course.attendances.all(),
-        "non_passengers": Attendance.objects.exclude(courses=course)
+        "course": course,
+        "attendances": course.attendances.all(),
+        "non_attendances": Attendance.objects.exclude(courses=course)
     })
 
-def book(request, course_id):
+def book(request, c_id):
     if request.method == "POST":
-        course = Course.objects.get(pk=course_id)
+        course = Course.objects.get(pk=c_id)
         attendance = Attendance.objects.get(pk=int(request.POST["attendance"]))
         attendance.courses.add(course)
 
