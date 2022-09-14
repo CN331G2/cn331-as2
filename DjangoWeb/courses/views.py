@@ -12,17 +12,17 @@ def index(request) :
         'courses': Course.objects.all()
     })
 
-def course(request, c_id):
-    course = Course.objects.get(pk=c_id)
+def course(request, id):
+    course = Course.objects.get(pk=id)
     return render(request, "courses/course.html", {
         "course": course,
         "attendances": course.attendances.all(),
         "non_attendances": Attendance.objects.exclude(courses=course)
     })
 
-def book(request, c_id):
+def book(request, id):
     if request.method == "POST":
-        course = Course.objects.get(pk=c_id)
+        course = Course.objects.get(pk=id)
         attendance = Attendance.objects.get(pk=int(request.POST["attendance"]))
         attendance.courses.add(course)
 

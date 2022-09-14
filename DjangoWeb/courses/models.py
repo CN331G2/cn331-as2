@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 
 class Course(models.Model):
-    c_id = models.CharField(max_length=5, unique=True)
+    c_id = models.CharField(max_length=5, unique=True, default="CN000")
     title = models.CharField(max_length=64, null=True, blank=True)
     semmester = models.IntegerField(null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
@@ -15,7 +15,7 @@ class Course(models.Model):
     # register = models.ManyToManyField(Student, blank=True)
 
     def __str__(self):
-        return f"{self.id} code:{self.c_id} title:{self.title} semmester:{self.semester} year:{self.year} seat count:{self.seat_count} seat max:{self.max_seat}quota:{self.quota}"
+        return f"{self.id} code:{self.c_id} title:{self.title} semmester:{self.semmester} year:{self.year} seat count:{self.seat_count} seat max:{self.max_seat}quota:{self.quota}"
 
 class Attendance(models.Model):
     ID = models.CharField(max_length=10)

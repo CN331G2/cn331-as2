@@ -1,0 +1,36 @@
+{% extends "courses/layout.html" %}
+{% block body %}
+<h1>Course {{ course.id }}</h1>
+<ul>
+    <li>Course id : {{ course.c_id }} </li>
+    <li>Title : {{ course.title }}</li>
+    <li>Semmester : {{ course.semmester }}</li>
+    <li>Year : {{ course.year }}</li>
+    <li>taken seat : {{ seat_count }}</li>
+    <li>Max seat : {{ course.max_seat }}</li>
+    <li>Quota : {{ course.quota }}</li>
+
+</ul>
+
+<h2>Class Attendance.</h2>
+<ul>
+    {% for attendance in attendences %}
+        <li>{{ attendance }}</li>
+    {% empty %}
+        <li>No attendances.</li>
+    {% endfor %}
+</ul>
+
+<h2>Register</h2>
+<form action="{% url 'book' course.id %}" method="POST">
+    {% csrf_token %}
+    <select name="passenger">
+        {% for passenger in non_passengers %}
+            <option value="{{ passenger.id }}">{{ passenger }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Add Passenger">
+</form>
+
+<a href="{% url 'index' %}">Back to Flight List</a>
+{% endblock %}
