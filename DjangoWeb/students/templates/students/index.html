@@ -1,10 +1,15 @@
 {% extends 'students/layout.html' %}
 {% block body %}
-<h1>Welcome, {{ request.user.first_name }}</h1>
+<h1> Welcome, {{ request.user.first_name }}</h1>
 <ul>
     <li>Username: {{ request.user.username }}</li>
     <li>Email: {{ request.user.email }}</li>
 </ul>
 
-<a href="{% url 'logout' %}">Log out</a>
+
+<a href="{% url 'logout' %}">
+    <button>Log out</button></a>
+<br>
+<a href><button>Quota request result</button></a>
+<br>
 {% endblock %}
