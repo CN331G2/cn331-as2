@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+from django.template import loader
 
 # Create your views here.
 
@@ -34,3 +34,6 @@ def logout_view(request):
         'message': 'Logged out'
     })
 
+def quota(request):
+    template = loader.get_template('students/quota.html')
+    return HttpResponse(template.render())

@@ -2,8 +2,8 @@
 {% block body %}
 
 <style>
-    body {
-    font-family: Arial;
+    body{
+        font-family: Arial, Helvetica, sans-serif;
     }
     header{
         background-color: rgb(72, 56, 179);
@@ -14,10 +14,10 @@
     }
     nav {
         float: left;
-        width: 10%;
+        width: 15%;
         height: 700px; 
         background: rgb(255, 255, 255);
-        padding: 10px;
+        padding: 5px;
     }
     article {
         float: left; 
@@ -26,10 +26,7 @@
         background-color: #f1f1f1;
         height: 700px; 
     }
-    nav ul {
-    list-style-type: none;
-    padding: 0;
-    }
+
 </style>
 
 <header>
@@ -39,8 +36,9 @@
 <section>
     <nav>
       <ul>
-        <li><a href="{% url 'logout' %}"><button>Log out</button></a></li>
-        <li><a href><button>Quota request result</button></a></li>
+        <a href="{% url 'logout' %}">Log out</a>
+        <br>
+        <a href="{% url 'quota' %}">Quota request result</a>
       </ul>
     </nav>
     <article>
