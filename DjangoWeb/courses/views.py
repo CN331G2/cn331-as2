@@ -9,7 +9,7 @@ from .models import Course, Attendance
 
 def index(request) :
     return render(request, 'courses/index.html' ,{
-        'courses': Course.objects.all()
+        'courses': Course.objects.all().order_by('c_id')
     })
 
 def course(request, id):

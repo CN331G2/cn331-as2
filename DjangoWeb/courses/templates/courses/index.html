@@ -4,7 +4,11 @@
 <h1>Course List:</h1>
 <ul>
     {% for course in courses %}
-    <li><a href="{% url 'course' course.id %}">{{ course }}</a></li>
+    <li><a href="{% url 'course' course.id %}">{{ course }}</a>
+    {% if course.quota %}
+    <button> enroll </button>
+    {% endif %}
+    </li>
     {% empty %}
     <li>No courses.</li>
 

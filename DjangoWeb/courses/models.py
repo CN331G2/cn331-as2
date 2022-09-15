@@ -15,10 +15,10 @@ class Course(models.Model):
     attendance = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
-        return f"{self.id} code:{self.c_id} title:{self.title} semmester:{self.semmester} year:{self.year} seat count:{self.seat_count} seat max:{self.max_seat}quota:{self.quota}"
+        return f"code:{self.c_id} title:{self.title} semmester:{self.semmester} year:{self.year} seat count:{self.seat_count} seat max:{self.max_seat}quota:{self.quota}"
 
 class Attendance(models.Model):
-    ID = models.CharField(max_length=10)
+    s_id = models.CharField(max_length=10)
     name = models.CharField(max_length=64)
     year = models.IntegerField()
     courses = models.ManyToManyField(Course, blank=True, related_name="attendances")
