@@ -18,8 +18,8 @@ class Course(models.Model):
         return f"code:{self.c_id} title:{self.title} semmester:{self.semmester} year:{self.year} seat count:{self.seat_count} seat max:{self.max_seat}quota:{self.quota}"
 
 class Attendance(models.Model):
-    s_id = models.CharField(max_length=10)
-    name = models.CharField(max_length=64)
+    s_id = models.CharField(max_length=10, default="-")
+    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True, related_name="deleteuser")
     year = models.IntegerField()
     courses = models.ManyToManyField(Course, blank=True, related_name="attendances")
 
