@@ -1,7 +1,7 @@
-import pkgutil
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 from .models import Course, Attendance
 
@@ -14,16 +14,21 @@ def index(request) :
 
 def course(request, id):
     course = Course.objects.get(pk=id)
+    User = get_user_model()
+    users = User.objects.all()
     return render(request, "courses/course.html", {
         "course": course,
-        "attendances": course.attendances.all(),
-        "non_attendances": Attendance.objects.exclude(courses=course)
+        "User" : users
+        # "attendances": course.attend.all(),
+        # "non_attendances": Attendance.objects.exclude(courses=course)
     })
 
 def book(request, id):
-    if request.method == "POST":
-        course = Course.objects.get(pk=id)
-        attendance = Attendance.objects.get(pk=int(request.POST["attendance"]))
-        attendance.courses.add(course)
-
-        return HttpResponseRedirect(reverse("course", args=(course.id,)))
+    course = Course.objects.get(pk=id)
+    if request.user not in course.attend.all():
+        course.attend.add(request.user)
+        course.seat_count = course.attend.count()
+        if course.sit_count == course.max_sit:
+            course.quota = False
+        course.save()
+    return HttpResponseRedirect(reverse('courses'))

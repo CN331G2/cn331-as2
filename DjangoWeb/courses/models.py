@@ -12,7 +12,7 @@ class Course(models.Model):
     seat_count = models.IntegerField(default=0, null=True, blank=True)
     max_seat = models.IntegerField(null=True, blank=True)
     quota = models.BooleanField(default=True)
-    attendance = models.ManyToManyField(User, blank=True)
+    attend = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
         return f"code:{self.c_id} title:{self.title} semmester:{self.semmester} year:{self.year} seat count:{self.seat_count} seat max:{self.max_seat}quota:{self.quota}"

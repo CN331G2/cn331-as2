@@ -19,7 +19,7 @@
         <tr>
             <th>Student List</th>
         </tr>
-        {% for attendance in course.attendance.all %}
+        {% for attendance in User %}
         <td>{{ attendance }}</td>
         {% endfor %}
 
@@ -31,8 +31,11 @@
 <form action="{% url 'book' course.id %}" method="POST">
     {% csrf_token %}
     <select name="attendance">
-        {% for pafwjker in non_pneifns %}
+        {% for attendance in User %}
+        {% if attendance != course.attendance.all %}
+        
         <option value="{{ attendance.id }}">{{ attendance }}</option>
+        {% endif %}
         {% endfor %}
     </select>
     <input type="submit" value="Add Attendance">
