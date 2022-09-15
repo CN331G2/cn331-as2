@@ -9,16 +9,6 @@
       border-collapse: collapse;
     }
 </style>
-<h3>Available Course</h3>
-<table style="width:50%" align="center">
-    <tr>
-      <th>Course ID</th>
-      <th>Course Title</th>
-      <th>Seat</th>
-      <th>Proceed</th>
-    </tr>
-
-  </table>
 
 <h3>Quota Request Result</h3>
 <table style="width:50%" align="center">
@@ -28,14 +18,7 @@
       <th>Proceed</th>
     </tr>
 </table>
-<ul>
-    {% for course in courses %}
-    <li>{{ course }}</li>
-    {% empty %}
-    <li>No courses.</li>
 
-    {% endfor %}
-</ul>
 
 <a href="{% url 'index' %}">Back</a>
 {% endblock %}
