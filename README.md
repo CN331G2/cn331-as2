@@ -19,9 +19,11 @@ Assignment #2 - Create Django Web App
 
 
 ### System ability
-They are . folder in this repository
+
+#### Directory list in repository
+
 1. .venv 
-    - set versual environment
+    - set versual environment for django project.
     - create **requirement.txt text file**
         - **requirements.txt text file** is for note this project environment.
 
@@ -53,27 +55,71 @@ They are . folder in this repository
         4. asgi.py
         5. wsgi.py
 
-    2. courses
-        - app for ...   
+#### They are 2 applications in this project.(project's name DjangoWeb)
+1. courses
+    - app for ...   
+    1. \__init__.py
+    2. admin.py
+        - config admin site
+        - make courseAdmin class
+    3. apps.py
+    4. migrations
+        - update migration 
         1. \__init__.py
-        2. admin.py
-        3. apps.py
-        4. migrations
-            - update migration 
-            1. \__init__.py
-        5. models.py
-        6. tests.py
-        7. views.py
-            - mapping 
-        8. urls.py
-            - connect urls in project to app
-            - 
+    5. models.py
+        - make object in applications
+        - define field in class
+    6. tests.py
+    7. views.py
+        - mapping
+        - make function action in webpage
+        - make book function
+    8. urls.py
+        - connect urls in project to app
+    9. templates
+        - courses
+            - course.html
+            - index.html
+            - layout.html
 
+2. students
+    - app for store login pages.
+    1. \__init__.py
+    2. admin.py
+    3. apps.py
+    4. migrations
+        - update migration 
+        1. \__init__.py
+    5. models.py
+    6. tests.py
+    7. views.py
+        - mapping
+        - make function action in webpage
+        - make cancel function.
+    8. urls.py
+        - connect urls in project to app
+    9. templates
+        - students
+            - index.html
+            - layout.html
+            - login.html
+            - quota.html
 
+first page in this project is login page.
+After loging in, you will come to student's homepage
+there are 3 link
+- logout 
+    - go back to login page
+- view courses
+    - go to course list
+    - course list page can see details each course
+    - in each course can enroll course if it's available
+- quota request result
+    - see what you already enroll.
+    - quota result page also can withdraw course too.
 
 
 
 [GitHub repo url](https://github.com/CN331G2/cn331-as2.git) 
 
 [Vedio link]()
-
