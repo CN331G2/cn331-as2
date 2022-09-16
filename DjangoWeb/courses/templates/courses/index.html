@@ -6,7 +6,7 @@
 <ul>
     {% for course in courses %}
     <!-- <li><a href="{% url 'course' course.id %}">{{ course }}</a> -->
-    <li>{{ course }}
+    <li>{{ course.c_id }}
     {% if course.quota %}
     <sup> available </sup>
     {% else %}
@@ -24,9 +24,12 @@
     <thead>
         <tr align="center">
 
-            <td>Course ID</td>
+            <td>Code</td>
             <td>Course Title</td>
+            <td>Semester</td>
+            <td>Year</td>
             <td>Seat</td>
+            <td>Status</td>
             <td>Proceed</td>
         </tr>
     </thead>
