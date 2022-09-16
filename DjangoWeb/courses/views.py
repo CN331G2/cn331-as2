@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.contrib import messages
 
-from .models import Course, Attendance
+from .models import Course
 
 # Create your views here.
 
@@ -25,6 +26,7 @@ def book(request, id):
     course = Course.objects.get(pk=id)
     if request.user not in course.attend.all():
         course.attend.add(request.user)
+        messages.success(request, "Course enrolled")
         course.seat_count = course.attend.count()
         if course.seat_count == course.max_seat:
             course.quota = False

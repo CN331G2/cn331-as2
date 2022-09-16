@@ -23,7 +23,14 @@
     <tr>
       <td>{{ class.c_id }}</td>
       <td>{{ class.title}}</td>
-      <td>{{ class.seat_count }}</td>
+      <td>{{ class.seat_count }} / {{class.max_seat}}</td>
+
+      <form action="{% url 'cancel' class.id %}" method="POST">
+        {% csrf_token %}
+      <input type="submit" value="withdraw">
+
+    </form>
+    
     </tr>
     {% endif %}
     {% endfor %}

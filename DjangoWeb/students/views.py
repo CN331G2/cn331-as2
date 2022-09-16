@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
-from django.template import loader
 from django.contrib.auth import get_user_model
+from django.contrib import messages
 
 from courses.models import Course
 
@@ -47,3 +47,14 @@ def quota(request):
         "course": course,
         "User" : users
     })
+
+def cancel(request, key):
+    course = Course.objects.get(id=key)
+    if request.user in course.attend.all():
+        messages.success(request, "Course Canceled")
+        course.attend.remove(request.user)
+        course.seat_count = course.attend.count()
+        if course.seat_count != course.max_seat:
+            course.quota = True
+        course.save()
+    return HttpResponseRedirect(reverse('quota'))
