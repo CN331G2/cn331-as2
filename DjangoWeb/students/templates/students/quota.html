@@ -1,15 +1,31 @@
 {% extends 'students/layout.html' %}
 {% block body %}
-<!-- <style>
-    body{
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    table, th, td  {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-</style> -->
+
 <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  header{
+      background-color: rgb(72, 56, 179);
+      padding: 30px;
+      text-align: left;
+      font-size: 20px;
+      color: white;
+  }
+  nav {
+      float: left;
+      width: 15%;
+      height: 700px; 
+      background: rgb(255, 255, 255);
+      padding: 5px;
+  }
+  article {
+      float: left; 
+      padding:10px;
+      width: 81%;
+      background-color: #f1f1f1;
+      height: 700px; 
+  }
   table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -26,41 +42,58 @@
     background-color: #dddddd;
   }
   </style>
+<header>
+  <h1> Welcome, {{ request.user.first_name }}</h1>
+</header> 
+<section>
+  <nav>
+    <ul>
+      <a href="{% url 'logout' %}">Log out</a>
+      <br>
+      <a href="{% url 'c_index' %}">View Courses</a>
+      <br>
+      <a href="{% url 'index' %}">Back</a>
+    </ul>
+  </nav>
+  <article>
+    <h3 align="center">Quota Request Result</h3>
+    <table style="width:50%" align="center">
+          <thead>
+              <tr align="center">
+    
+                  <td>Course ID</td>
+                  <td>Course Title</td>
+                  <td>Seat</td>
+                  <td>Proceed</td>
+              </tr>
+          </thead>
+          {% for class in course %}
+          {% if request.user in class.attend.all %}
+          <tbody>
+              <tr align="center">
+                  <td>{{ class.c_id }}</td>
+                  <td>{{ class.title }}</td>
+                  <td>{{ class.seat_count }} / {{class.max_seat}}</td>
+                  <td><form action="{% url 'cancel' class.id %}" method="POST">
+                    {% csrf_token %}
+                  <input type="submit" value="withdraw">
+            
+                </td>
+                  
+                  </form>
+              </tr>
+          </tbody>
+          {% endif%}
+          {% endfor %}
+    
+    </table>
+  </article>
+  
+</section>
 
-<h3>Quota Request Result</h3>
-<table style="width:50%" align="center">
-      <thead>
-          <tr align="center">
-
-              <td>Course ID</td>
-              <td>Course Title</td>
-              <td>Seat</td>
-              <td>Proceed</td>
-          </tr>
-      </thead>
-      {% for class in course %}
-      {% if request.user in class.attend.all %}
-      <tbody>
-          <tr align="center">
-              <td>{{ class.c_id }}</td>
-              <td>{{ class.title }}</td>
-              <td>{{ class.seat_count }} / {{class.max_seat}}</td>
-              <td><form action="{% url 'cancel' class.id %}" method="POST">
-                {% csrf_token %}
-              <input type="submit" value="withdraw">
-        
-            </td>
-              
-              </form>
-          </tr>
-      </tbody>
-      {% endif%}
-      {% endfor %}
-
-</table>
 
 
-<a href="{% url 'index' %}">Back</a>
+
 {% endblock %}
 
 
