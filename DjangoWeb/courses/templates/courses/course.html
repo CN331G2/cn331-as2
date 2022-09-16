@@ -1,15 +1,18 @@
 {% extends "courses/layout.html" %}
 {% block body %}
-<h1>Course {{ course.id }}</h1>
+<h1>{{ course.c_id }}</h1>
 <ul>
-    <li>Course id : {{ course.c_id }} </li>
     <li>Title : {{ course.title }}</li>
     <li>Semmester : {{ course.semmester }}</li>
     <li>Year : {{ course.year }}</li>
-    <li>taken seat : {{ seat_count }}</li>
-    <li>Max seat : {{ course.max_seat }}</li>
-    <li>Quota : {{ course.quota }}</li>
+    <li>seat / max : {{ course.seat_count }} / {{ course.max_seat }}</li>
 
+    {% if course.quota %}
+    <li> available</li>
+    {% else %}
+    <li> unavailable</li>
+
+    {% endif %}
 </ul>
 
 {% if user.is_staff %}
