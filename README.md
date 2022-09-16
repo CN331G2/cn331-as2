@@ -122,4 +122,4 @@ there are 3 link
 
 [GitHub repo url](https://github.com/CN331G2/cn331-as2.git) 
 
-[Vedio link]()
+[Vedio link](https://tuipied.sharepoint.com/:v:/s/msteams_a6e25a/EaN-BQE-yi5Hi-0hhfraooUBtL4CYXpc-VH301iusN8sag?e=pKxP4J)

@@ -55,7 +55,9 @@ thead{
         <br>
         <a href="{% url 'c_index' %}">View Courses</a>
         <br>
-        <a href="{% url 'index' %}">Back</a>
+        <a href="{% url 'quota' %}">Quota Request Result</a>
+        <a href="{% url 'index' %}">Back to HOME</a>
+        <br>
       </ul>
     </nav>
     <article>
@@ -101,14 +103,6 @@ thead{
         {% endfor %}
         </tr>
 
-        <!-- {% for student in User %}
-        <tr>
-            {% if student not in course.attend.all %}
-            <td>{{ student }}</td>
-            {% endif %}    
-
-        </tr>
-        {% endfor %} -->
     </tbody>
     </table>
 
