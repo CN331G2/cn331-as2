@@ -1,12 +1,26 @@
 {% extends 'students/layout.html' %}
 {% block body %}
-{% if message %}
-{{ message }}
-{% endif %}
+<style>
+    body{
+        padding-left: 35%;
+        padding-top: 10px;
+    }
+    body {
+        background-color: #f1f1f1;
+        
+    }
+</style>
+</style>
+
+<h1> Log in page</h1>
+
 <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
     <input type="submit" value="login">
 </form>
+{% if message %}
+{{ message }}
+{% endif %}
 {% endblock %}
