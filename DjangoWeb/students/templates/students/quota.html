@@ -12,11 +12,21 @@
 
 <h3>Quota Request Result</h3>
 <table style="width:50%" align="center">
+  
     <tr>
       <th>Course ID</th>
       <th>Course Title</th>
       <th>Proceed</th>
     </tr>
+    {% for class in course %}
+    {% if request.user in class.attend.all %}
+    <tr>
+      <td>{{ class.c_id }}</td>
+      <td>{{ class.title}}</td>
+      <td>{{ class.seat_count }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
 </table>
 
 

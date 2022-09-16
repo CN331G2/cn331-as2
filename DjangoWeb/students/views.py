@@ -3,6 +3,10 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.template import loader
+from django.contrib.auth import get_user_model
+
+from courses.models import Course
+
 
 # Create your views here.
 
@@ -35,5 +39,11 @@ def logout_view(request):
     })
 
 def quota(request):
-    template = loader.get_template('students/quota.html')
-    return HttpResponse(template.render())
+    
+    course = Course.objects.all()
+    User = get_user_model()
+    users = User.objects.all()
+    return render(request, "students/quota.html", {
+        "course": course,
+        "User" : users
+    })
