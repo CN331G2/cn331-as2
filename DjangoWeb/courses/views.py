@@ -1,8 +1,8 @@
+from ssl import AlertDescription
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.contrib import messages
 
 from .models import Course
 
@@ -17,6 +17,10 @@ def course(request, id):
     course = Course.objects.get(pk=id)
     User = get_user_model()
     users = User.objects.all()
+    course.seat_count = course.attend.count()
+    if course.max_seat <= course.seat_count:
+        course.quota = False
+    course.save()
     return render(request, "courses/course.html", {
         "course": course,
         "User" : users
@@ -24,11 +28,12 @@ def course(request, id):
 
 def book(request, id):
     course = Course.objects.get(pk=id)
-    if request.user not in course.attend.all():
+    if course.quota == True :
         course.attend.add(request.user)
-        messages.success(request, "Course enrolled")
         course.seat_count = course.attend.count()
         if course.seat_count == course.max_seat:
             course.quota = False
         course.save()
+    else :
+        AlertDescription("This course is unavailable!")
     return HttpResponseRedirect(reverse('quota'))
