@@ -22,26 +22,30 @@
         {% for attendance in course.attend.all %}
         <td>{{ attendance }}</td>
         {% endfor %}
-
-    </table>
-</div>
-{% endif %}
-
-<h2>Register</h2>
-<form action="{% url 'book' course.id %}" method="POST">
-    {% csrf_token %}
-    <select name="attendance">
+        <tr>
+            <th>Student not enroll</th>
+        </tr>
         {% for student in User %}
             
             {% if student not in course.attend.all %}
-        <option value="{{ student.id }}">{{ student }}</option>
-            
+        
+            <td>{{ student }}</td>
             {% endif %}
             
         {% endfor %}
-    </select>
-    <input type="submit" value="Add Attendance">
+
+    </table>
+
+</div>
+{% endif %}
+
+{% if request.user not in course.attend.all %}
+<h2>Register</h2>
+<form action="{% url 'book' course.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="enroll">
 </form>
 
 <a href="{% url 'c_index' %}">Back to Course List</a>
+{% endif %}
 {% endblock %}

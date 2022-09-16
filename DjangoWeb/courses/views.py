@@ -19,8 +19,6 @@ def course(request, id):
     return render(request, "courses/course.html", {
         "course": course,
         "User" : users
-        # "attendances": course.attend.all(),
-        # "non_attendances": Attendance.objects.exclude(courses=course)
     })
 
 def book(request, id):
@@ -28,7 +26,7 @@ def book(request, id):
     if request.user not in course.attend.all():
         course.attend.add(request.user)
         course.seat_count = course.attend.count()
-        if course.sit_count == course.max_sit:
+        if course.seat_count == course.max_seat:
             course.quota = False
         course.save()
-    return HttpResponseRedirect(reverse('courses'))
+    return HttpResponseRedirect(reverse('quota'))
