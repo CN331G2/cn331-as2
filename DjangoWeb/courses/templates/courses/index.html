@@ -6,9 +6,9 @@
     {% for course in courses %}
     <li><a href="{% url 'course' course.id %}">{{ course }}</a>
     {% if course.quota %}
-    <button> enroll </button>
+    <button> available </button>
     {% else %}
-    <button> details </button>
+    <button> not available </button>
     {% endif %}
     </li>
     {% empty %}
@@ -16,4 +16,5 @@
 
     {% endfor %}
 </ul>
+<a href="{% url 'index' %}">Back</a>
 {% endblock %}

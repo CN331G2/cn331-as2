@@ -1,41 +1,66 @@
 {% extends 'students/layout.html' %}
 {% block body %}
-<style>
+<!-- <style>
     body{
         font-family: Arial, Helvetica, sans-serif;
     }
-    table, th, td {
+    table, th, td  {
       border: 1px solid black;
       border-collapse: collapse;
     }
-</style>
+</style> -->
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>
 
 <h3>Quota Request Result</h3>
 <table style="width:50%" align="center">
-  
-    <tr>
-      <th>Course ID</th>
-      <th>Course Title</th>
-      <th>Proceed</th>
-    </tr>
-    {% for class in course %}
-    {% if request.user in class.attend.all %}
-    <tr>
-      <td>{{ class.c_id }}</td>
-      <td>{{ class.title}}</td>
-      <td>{{ class.seat_count }} / {{class.max_seat}}</td>
+      <thead>
+          <tr align="center">
 
-      <form action="{% url 'cancel' class.id %}" method="POST">
-        {% csrf_token %}
-      <input type="submit" value="withdraw">
+              <td>Course ID</td>
+              <td>Course Title</td>
+              <td>Seat</td>
+              <td>Proceed</td>
+          </tr>
+      </thead>
+      {% for class in course %}
+      {% if request.user in class.attend.all %}
+      <tbody>
+          <tr align="center">
+              <td>{{ class.c_id }}</td>
+              <td>{{ class.title }}</td>
+              <td>{{ class.seat_count }} / {{class.max_seat}}</td>
+              <td><form action="{% url 'cancel' class.id %}" method="POST">
+                {% csrf_token %}
+              <input type="submit" value="withdraw">
+        
+            </td>
+              
+              </form>
+          </tr>
+      </tbody>
+      {% endif%}
+      {% endfor %}
 
-    </form>
-    
-    </tr>
-    {% endif %}
-    {% endfor %}
 </table>
 
 
 <a href="{% url 'index' %}">Back</a>
 {% endblock %}
+
+

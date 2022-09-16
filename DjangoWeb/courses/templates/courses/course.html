@@ -39,7 +39,8 @@
 </div>
 {% endif %}
 
-{% if request.user not in course.attend.all %}
+
+{% if course.quota  %}
 <h2>Register</h2>
 <form action="{% url 'book' course.id %}" method="POST">
     {% csrf_token %}
@@ -48,4 +49,5 @@
 
 <a href="{% url 'c_index' %}">Back to Course List</a>
 {% endif %}
+
 {% endblock %}
