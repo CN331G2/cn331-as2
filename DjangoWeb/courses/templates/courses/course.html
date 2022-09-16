@@ -32,12 +32,12 @@
     {% csrf_token %}
     <select name="attendance">
         {% for student in User %}
-            {% for alreadyin in course.attend.all %}
-            {% if student != alreadyin %}
-        
+            
+            {% if student not in course.attend.all %}
         <option value="{{ student.id }}">{{ student }}</option>
+            
             {% endif %}
-            {% endfor %}
+            
         {% endfor %}
     </select>
     <input type="submit" value="Add Attendance">

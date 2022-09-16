@@ -20,6 +20,6 @@ class Course(models.Model):
 class Attendance(models.Model):
     s_id = models.CharField(max_length=10, default="-")
     user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True, related_name="deleteuser")
-
+    
     def __str__(self):
         return f"{self.id} s_id:{self.s_id} user:{self.user}"
