@@ -108,15 +108,15 @@ Assignment #2 - Create Django Web App
 first page in this project is login page.
 After loging in, you will come to student's homepage
 there are 3 link
->logout 
->>go back to login page
->view courses
->>go to course list
->>course list page can see details each course
->>in each course can enroll course if it's available
->quota request result
->>see what you already enroll.
->>quota result page also can withdraw course too.
+- logout 
+go back to login page
+- view courses
+go to course list
+course list page can see details each course
+in each course can enroll course if it's available
+- quota request result
+see what you already enroll.
+quota result page also can withdraw course too.
 
 
 
