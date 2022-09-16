@@ -1,42 +1,115 @@
 {% extends "courses/layout.html" %}
 {% block body %}
-<h1>{{ course.c_id }}</h1>
-<ul>
-    <li>Title : {{ course.title }}</li>
-    <li>Semmester : {{ course.semmester }}</li>
-    <li>Year : {{ course.year }}</li>
-    <li>seat / max : {{ course.seat_count }} / {{ course.max_seat }}</li>
+<style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  header{
+      background-color: rgb(72, 56, 179);
+      padding: 30px;
+      text-align: left;
+      font-size: 20px;
+      color: white;
+  }
+  nav {
+      float: left;
+      width: 15%;
+      height: 700px; 
+      background: rgb(255, 255, 255);
+      padding: 5px;
+  }
+  article {
+      float: left; 
+      padding:10px;
+      width: 81%;
+      background-color: #f1f1f1;
+      height: 700px; 
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
 
-    {% if course.quota %}
-    <li> available</li>
-    {% else %}
-    <li> unavailable</li>
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
 
-    {% endif %}
-</ul>
+    padding: 8px;
+  }
+thead{
+    background-color: grey;
+}
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
 
+<header>
+    <h1> Welcome, {{ request.user.first_name }}</h1>
+  </header> 
+  <section>
+    <nav>
+      <ul>
+        <a href="{% url 'logout' %}">Log out</a>
+        <br>
+        <a href="{% url 'c_index' %}">View Courses</a>
+        <br>
+        <a href="{% url 'index' %}">Back</a>
+      </ul>
+    </nav>
+    <article>
+        <h1 align="center">Course details</h1>
+        <h1>{{ course.c_id }}</h1>
+<table>
+      <tr>
+        <td>Title </td>
+        <td>{{ course.title }}</td>
+      </tr>
+      <tr>
+        <td>Semester</td>
+        <td>{{ course.semmester }}</td>
+      </tr>
+      <tr>
+        <td>Year</td>
+        <td>{{ course.year }}</td>
+      </tr>
+      <tr>
+        <td>Seat</td>
+        <td>{{ course.seat_count }} / {{ course.max_seat }}</td>
+      </tr>
+</table>
+
+
+
+
+<br>
+<br>
 {% if user.is_staff %}
 <p1><b> Admin Interface </b></p1>
-<div class="table" align="center">
-    <table>
-        <tr>
-            <th>Student List</th>
-        </tr>
-        {% for attendance in course.attend.all %}
+<div class="table">
+    <table><thead>
+
+            <td>Student List</td>
+
+<thead>
+
+    <tbody>
+        
+        {% for attendance in course.attend.all %}<tr>
         <td>{{ attendance }}</td>
         {% endfor %}
-        <tr>
-            <th>Student not enroll</th>
         </tr>
-        {% for student in User %}
-            
-            {% if student not in course.attend.all %}
-        
-            <td>{{ student }}</td>
-            {% endif %}
-            
-        {% endfor %}
 
+        <!-- {% for student in User %}
+        <tr>
+            {% if student not in course.attend.all %}
+            <td>{{ student }}</td>
+            {% endif %}    
+
+        </tr>
+        {% endfor %} -->
+    </tbody>
     </table>
 
 </div>
@@ -44,13 +117,23 @@
 
 
 {% if course.quota  %}
+
 <h2>Register</h2>
 <form action="{% url 'book' course.id %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="enroll">
 </form>
 
-<a href="{% url 'c_index' %}">Back to Course List</a>
 {% endif %}
+      
+    </article>
+    
+  </section>
+  
+  
+
+
+
+
 
 {% endblock %}
