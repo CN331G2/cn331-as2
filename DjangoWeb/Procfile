@@ -1,1 +1,1 @@
-web: gunicorn heroku_demo.wsgi
+web: gunicorn DjangoWeb.wsgi

@@ -11,11 +11,11 @@ from courses.models import Course
 
 
 def index(request):
-    
+    c = {}
     if not request.user.is_authenticated :
         return HttpResponseRedirect(reverse('login'))
     else:
-        return render(request, 'students/index.html')
+        return render(request, 'students/index.html', c)
 
 def login_view(request):
     if request.method == "POST":

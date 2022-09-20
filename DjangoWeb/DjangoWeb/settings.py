@@ -125,7 +125,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://cn331as3herokuapp.herokuapp.com/']
+# CSRF_TRUSTED_ORIGINS = []
+
+CSRF_TRUSTED_ORIGINS = ['https://stormy-ravine-24433.herokuapp.com/login/']
 
 import django_heroku
+
 django_heroku.settings(locals())
