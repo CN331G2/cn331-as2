@@ -1,0 +1,16 @@
+1. username: admin
+   email: admin@example.com
+   password: ubuntu1234
+
+2. username: Natiphon
+   email: natiphon@example.com
+   password: pang16102545
+
+3. username: supakrit
+   email: supakrit@example.com
+   password: John2545
+
+4. username: Harry
+   email: harry@example.com
+   password: Potter55
+
