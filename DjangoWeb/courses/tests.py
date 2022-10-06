@@ -1,46 +1,30 @@
-from django.contrib.auth.models import User
-from django.test import TestCase, Client
-
-from django.urls import reverse
-from django.contrib.auth.hashers import make_password
-from setuptools import setup
-
+from django.test import TestCase
 from .models import Course
+from django.contrib.auth.models import User
 
-# Create your tests here.
+class FlightTestCase(TestCase):
 
-class CourseTestCase(TestCase):
+    def setUp(self):      
+        course1 = Course.objects.create(c_id="test1", max_seat=2)
+        course2 = Course.objects.create(c_id="test2")
 
-    def setup(self):
+    def test_seat_available(self):
+        """ is_seat_available should be True """
 
-        self.client = Client()
+        course = Course.objects.first()
 
-        password_k = make_password('kritpassword')
-        password_p = make_password('pangpassword')
+        self.assertTrue(course.is_seat_available())
 
-        user_k = User.objects.create(username='krit', password=password_k)
-        user_p = User.objects.create(username='pang', password=password_p)
+    def test_seat_not_available(self):
+        """ is_seat_available should be False """
 
-        Course.objects.create(id='999')
-        Course.objects.create(id='9999', max_seat=1)
+        student1 = User.objects.create(
+            first_name="harry", last_name="potter")
+        student2 = User.objects.create(
+            first_name="hermione", last_name="granger")
 
-    def test_courses_view(self):
-        self.client.login(username='krit', password='kritpassword')
+        course = Course.objects.first()
+        course.passengers.add(student1)
+        course.passengers.add(student2)
 
-        response = self.client.get(reverse('c_index'))
-        self.assertEqual(response.status_code, 200)
-
-#ได้E
-    def test_course_view(self):
-        self.client.login(username='pang', password='pangpassword')
-        c1 = Course.objects.first()
-        response = self.client.get(reverse('course', args=(c1.id,)))
-        self.assertEqual(response.status_code, 200)
-
-#example
-    # def test_valid_flight_page(self):
-    #     """ valid flight page should return status code 200 """
-    #     c = Client()
-    #     f = Flight.objects.first()
-    #     response = c.get(reverse('flights:flight', args=(f.id,)))
-    #     self.assertEqual(response.status_code, 200)
+        self.assertFalse(Course.is_seat_available())
