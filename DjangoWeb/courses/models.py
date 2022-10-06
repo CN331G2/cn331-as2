@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Course(models.Model):
-    c_id = models.CharField(max_length=5, unique=True, default="CN000")
+    c_id = models.CharField(max_length=5, unique=True)
     title = models.CharField(max_length=64, null=True, blank=True)
     semmester = models.IntegerField(null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
