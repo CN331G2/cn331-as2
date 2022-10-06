@@ -2,7 +2,7 @@ from django.test import TestCase
 from .models import Course
 from django.contrib.auth.models import User
 
-class FlightTestCase(TestCase):
+class CourseTestCase(TestCase):
 
     def setUp(self):      
         course1 = Course.objects.create(c_id="test1", max_seat=2)
@@ -19,12 +19,12 @@ class FlightTestCase(TestCase):
         """ is_seat_available should be False """
 
         student1 = User.objects.create(
-            first_name="harry", last_name="potter")
+            username="harry", password="potter")
         student2 = User.objects.create(
-            first_name="hermione", last_name="granger")
+            username="hermione", password="granger")
 
         course = Course.objects.first()
-        course.passengers.add(student1)
-        course.passengers.add(student2)
+        course.attend.add(student1)
+        course.attend.add(student2)
 
-        self.assertFalse(Course.is_seat_available())
+        self.assertFalse(course.is_seat_available())
