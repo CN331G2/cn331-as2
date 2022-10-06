@@ -39,20 +39,17 @@ class CourseViewTestCase(TestCase):
 
     def test_valid_course_page(self):
         """ valid course page should return status code 200 """
-
-        c = Client()
+        self.client.login(username='krit', password='kritpassword')
         f = Course.objects.first()
-        response = c.get(reverse('course', args=(f.id,)))
+        response = self.client.get(reverse('course', args=(f.id,)))
         self.assertEqual(response.status_code, 200)
 
 
     def test_invalid_course_page(self):
         """ invalid flight page should return status code 404 """
-        # self.client.login(username='krit', password='kritpassword')
-        c = Client()
+        self.client.login(username='krit', password='kritpassword')
         max_id = Course.objects.all().aggregate(Max("id"))['id__max']
-
-        response = c.get(Course,pk=reverse('course', args=(max_id+1,)))
+        response = self.client.get(Course,pk=reverse('course', args=(max_id+1,)))
         self.assertEqual(response.status_code, 404)
 
         

@@ -38,7 +38,6 @@ class UserTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-#ได้FF
 
     # def test_warning_massage_login(self):
     #     someone = {'username': 'krit', 'password': 'wrongpassword'}
