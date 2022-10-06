@@ -12,7 +12,6 @@ class CourseTestCase(TestCase):
         """ is_seat_available should be True """
 
         course = Course.objects.first()
-
         self.assertTrue(course.is_seat_available())
 
     def test_seat_not_available(self):
@@ -22,9 +21,7 @@ class CourseTestCase(TestCase):
             username="harry", password="potter")
         student2 = User.objects.create(
             username="hermione", password="granger")
-
         course = Course.objects.first()
         course.attend.add(student1)
         course.attend.add(student2)
-
         self.assertFalse(course.is_seat_available())
