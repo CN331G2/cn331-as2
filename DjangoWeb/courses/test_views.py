@@ -6,12 +6,10 @@ from .models import Course
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 
-class FlightViewTestCase(TestCase):
+class CourseViewTestCase(TestCase):
 
     def setUp(self):
-        # create airports
         self.client = Client()
-
 
         password_k = make_password('kritpassword')
         password_p = make_password('pangpassword')
@@ -39,25 +37,28 @@ class FlightViewTestCase(TestCase):
         self.assertEqual(
             response.context['courses'].count(), 2)
 
-    def test_valid_flight_page(self):
-        """ valid flight page should return status code 200 """
+    def test_valid_course_page(self):
+        """ valid course page should return status code 200 """
 
         c = Client()
         f = Course.objects.first()
         response = c.get(reverse('course', args=(f.id,)))
         self.assertEqual(response.status_code, 200)
 
-    # def test_invalid_flight_page(self):
-    #     """ invalid flight page should return status code 404 """
-    #     # self.client.login(username='krit', password='kritpassword')
-    #     c = Client()
-    #     max_id = Course.objects.all().aggregate(Max("id"))['id__max']
 
-    #     response = c.get(reverse('course', args=(max_id+1,)))
-    #     self.assertEqual(response.status_code, 404)
+    def test_invalid_course_page(self):
+        """ invalid flight page should return status code 404 """
+        # self.client.login(username='krit', password='kritpassword')
+        c = Client()
+        max_id = Course.objects.all().aggregate(Max("id"))['id__max']
 
-    def test_cannot_book_nonavailable_seat_flight(self):
-        """ cannot book full capacity flight"""
+        response = c.get(Course,pk=reverse('course', args=(max_id+1,)))
+        self.assertEqual(response.status_code, 404)
+
+        
+
+    def test_cannot_book_nonavailable_seat_course(self):
+        """ cannot book full capacity course"""
         self.client.login(username='krit', password='kritpassword')
 
         f = Course.objects.first()

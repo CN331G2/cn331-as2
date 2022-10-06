@@ -31,6 +31,15 @@ class UserTestCase(TestCase):
         response = self.client.post(reverse('login'), someone, follow=True)
         self.assertEqual(response.status_code, 200)
 
+
+    def test_logout_view(self):
+        self.client.login(username='krit', password='kritpassword')
+        response = self.client.post(reverse('logout'))
+        self.assertEqual(response.status_code, 200)
+
+
+#ได้FF
+
     # def test_warning_massage_login(self):
     #     someone = {'username': 'krit', 'password': 'wrongpassword'}
     #     response = self.client.post(reverse('login'), someone, follow=True)
@@ -38,15 +47,23 @@ class UserTestCase(TestCase):
     #     self.assertEqual(len(messages), 1)
     #     self.assertEqual(str(messages[0]), 'Invalid member.')
 
-    def test_logout_view(self):
-        self.client.login(username='krit', password='kritpassword')
-        response = self.client.post(reverse('logout'))
-        self.assertEqual(response.status_code, 200)
-
     # def test_success_massage_logout(self):
     #     self.client.login(username='krit', password='kritpassword')
     #     response = self.client.post(reverse('logout'))
     #     messages = list(response.context['message'])
     #     self.assertEqual(len(messages), 1)
-    #     self.assertEqual(str(messages[0]), 'Logged out.')
+    #     self.assertEqual(str(messages), 'Logged out.')
 
+    def test_warning_massage_login(self):
+        someone = {'username': 'krit', 'password': 'wrongpassword'}
+        response = self.client.post(reverse('login'), someone, follow=True)
+        messages = list(response.context['message'])
+        self.assertEqual(len(messages), 15)
+        self.assertEqual("".join(messages), 'Invalid member.')
+
+    def test_success_massage_logout(self):
+        self.client.login(username='krit', password='kritpassword')
+        response = self.client.post(reverse('logout'))
+        messages = list(response.context['message'])
+        self.assertEqual(len(messages), 10)
+        self.assertEqual("".join(messages), 'Logged out')
