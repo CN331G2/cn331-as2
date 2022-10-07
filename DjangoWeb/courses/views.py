@@ -34,6 +34,4 @@ def book(request, id):
         if course.seat_count == course.max_seat:
             course.quota = False
         course.save()
-    else :
-        AlertDescription("This course is unavailable!")
     return HttpResponseRedirect(reverse('quota'))

@@ -16,7 +16,7 @@ class Course(models.Model):
     attend = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
-        return f"code:{self.c_id} title:{self.title} semmester:{self.semmester} year:{self.year} seat count:{self.seat_count} seat max:{self.max_seat}quota:{self.quota}"
+        return f"code:{self.c_id} seat count:{self.seat_count} seat max:{self.max_seat} quota:{self.quota}"
 
     def is_seat_available(self):
         return self.attend.count() < self.max_seat
