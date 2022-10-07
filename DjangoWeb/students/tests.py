@@ -2,6 +2,8 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
+from courses.models import Course
+
 # Create your tests here.
 
 class UserTestCase(TestCase):
@@ -9,6 +11,7 @@ class UserTestCase(TestCase):
         self.client = Client()
         password = make_password('kritpassword')
         user = User.objects.create(username='krit', password=password)
+        Course.objects.create(c_id="test1")
 
     def test_authenticated_user_index_view(self):
         self.client.login(username='krit', password='kritpassword')
@@ -47,3 +50,17 @@ class UserTestCase(TestCase):
         response = self.client.get(reverse('quota'))
         self.assertEqual(response.status_code, 200)
 
+    def test_withdraw_course(self):
+
+        self.client.login(username='krit', password='kritpassword')
+        course = Course.objects.first()
+        course.attend.add(User.objects.get(username='krit'))
+        response = self.client.get(reverse('cancel', args=(course.id,)))
+        self.assertEqual(course.attend.count(), 0)
+
+    def test_redirect_cancel_course(self):
+        self.client.login(username='krit', password='kritpassword')
+
+        course = Course.objects.first()
+        response = self.client.get(reverse('cancel', args=(course.id,)))
+        self.assertRedirects(response, reverse('quota'))

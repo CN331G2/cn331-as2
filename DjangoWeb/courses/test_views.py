@@ -51,11 +51,11 @@ class CourseViewTestCase(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_cannot_book_nonavailable_seat_course(self):
-        """ cannot book full capacity course"""
+        """ cannot book full max seat course"""
 
         self.client.login(username='krit', password='kritpassword')
         f = Course.objects.first()
-        f.capacity = 1
+        f.max_seat = 1
         f.save()
         self.client.post(reverse('book', args=(f.id,)))
         self.assertEqual(f.attend.count(), 1)
