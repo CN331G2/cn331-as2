@@ -37,7 +37,7 @@ def logout_view(request):
     })
 
 def quota(request):
-    
+        
     course = Course.objects.all()
     User = get_user_model()
     users = User.objects.all()

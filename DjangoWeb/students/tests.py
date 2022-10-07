@@ -42,3 +42,8 @@ class UserTestCase(TestCase):
         messages = list(response.context['message'])
         self.assertEqual(len(messages), 10)
         self.assertEqual("".join(messages), 'Logged out')
+
+    def test_cancle_view(self):
+        response = self.client.get(reverse('quota'))
+        self.assertEqual(response.status_code, 200)
+
