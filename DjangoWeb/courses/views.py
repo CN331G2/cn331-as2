@@ -18,8 +18,6 @@ def course(request, id):
     User = get_user_model()
     users = User.objects.all()
     course.seat_count = course.attend.count()
-    if course.max_seat <= course.seat_count:
-        course.quota = False
     course.save()
     return render(request, "courses/course.html", {
         "course": course,

@@ -13,6 +13,10 @@ class UserTestCase(TestCase):
         user = User.objects.create(username='krit', password=password)
         Course.objects.create(c_id="test1")
 
+    def test_redirect_reverse_login(self):
+        response = self.client.get(reverse('index'))
+        self.assertRedirects(response, reverse('login'))
+
     def test_authenticated_user_index_view(self):
         self.client.login(username='krit', password='kritpassword')
         response = self.client.get(reverse('index'))
@@ -64,3 +68,5 @@ class UserTestCase(TestCase):
         course = Course.objects.first()
         response = self.client.get(reverse('cancel', args=(course.id,)))
         self.assertRedirects(response, reverse('quota'))
+
+    
