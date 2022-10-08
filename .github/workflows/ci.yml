@@ -10,6 +10,6 @@ jobs:
       run: |
         pip3 install --user -r requirements.txt
         python3 DjangoWeb/manage.py makemigrations
-        python3 DjangWeb/manage.py migrate
-        coverage run --source='.' DjangWeb/manage.py test
+        python3 DjangoWeb/manage.py migrate
+        coverage run --source='.' DjangoWeb/manage.py test
         coverage report
