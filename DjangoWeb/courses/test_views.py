@@ -75,4 +75,4 @@ class CourseViewTestCase(TestCase):
         course.max_seat=2
         self.client.get(reverse('book', args=(course.id,)))
         course.refresh_from_db()
-        self.assertEqual(course.quota, False)
+        self.assertEqual(course.quota, False) 
