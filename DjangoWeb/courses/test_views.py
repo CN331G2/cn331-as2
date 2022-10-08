@@ -59,3 +59,21 @@ class CourseViewTestCase(TestCase):
         f.save()
         self.client.post(reverse('book', args=(f.id,)))
         self.assertEqual(f.attend.count(), 1)
+
+    def test_success_book_available_seat_course(self):
+        
+
+        self.client.login(username='krit', password='kritpassword')
+        f = Course.objects.get(c_id="test2")
+        self.client.post(reverse('book', args=(f.id,)))
+        self.assertEqual(f.attend.count(), 2)
+
+    def test_success_book_available_seat_course_full(self):
+        
+        self.client.login(username='pang', password='pangpassword')
+        f = Course.objects.first()
+        f.max_seat = 2
+        f.save()
+        self.client.post(reverse('book', args=(f.id,)))
+        self.assertEqual(f.attend.count(), 2)
+        self.assertFalse(f.quota)
