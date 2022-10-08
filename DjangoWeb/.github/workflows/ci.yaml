@@ -13,5 +13,5 @@ jobs:
         python manage.py makemigrations
         python manage.py migrate
         coverage erase
-        coverage run manage.py test
+        coverage run DjangoWeb/manage.py test
         coverage report 
