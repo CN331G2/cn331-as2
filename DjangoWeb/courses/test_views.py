@@ -71,9 +71,8 @@ class CourseViewTestCase(TestCase):
     def test_success_book_available_seat_course_full(self):
         
         self.client.login(username='pang', password='pangpassword')
-        f = Course.objects.first()
-        f.max_seat = 2
-        f.save()
-        self.client.post(reverse('book', args=(f.id,)))
-        self.assertEqual(f.attend.count(), 2)
-        self.assertFalse(f.quota)
+        course = Course.objects.get(c_id='test1')
+        course.max_seat=2
+        response = self.client.get(reverse('book', args=(course.id,)))
+        course.refresh_from_db()
+        self.assertEqual(course.quota, False)

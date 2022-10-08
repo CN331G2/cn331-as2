@@ -26,12 +26,13 @@ def course(request, id):
 def book(request, id):
     course = Course.objects.get(pk=id)
     course.seat_count = course.attend.count()
+    course.save()
     if course.seat_count >= course.max_seat:
         course.quota = False
     if course.quota == True :
         course.attend.add(request.user)
         course.seat_count = course.attend.count()
-    if course.attend.count() >= course.max_seat:
+    if course.seat_count >= course.max_seat:
         course.quota = False
     course.save()
     return HttpResponseRedirect(reverse('quota'))
