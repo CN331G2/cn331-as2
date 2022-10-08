@@ -1,0 +1,102 @@
+{% extends 'courses/layout.html' %}
+{% block body %}
+<style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  header{
+      background-color: rgb(72, 56, 179);
+      padding: 30px;
+      text-align: left;
+      font-size: 20px;
+      color: white;
+  }
+  nav {
+      float: left;
+      width: 15%;
+      height: 700px; 
+      background: rgb(255, 255, 255);
+      padding: 5px;
+  }
+  article {
+      float: left; 
+      padding:10px;
+      width: 81%;
+      background-color: #f1f1f1;
+      height: 700px; 
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>
+
+<header>
+    <h1> Welcome, {{ request.user.first_name }}</h1>
+  </header> 
+  <section>
+    <nav>
+      <ul>
+        <a href="{% url 'logout' %}">Log out</a>
+        <br>
+        <a href="{% url 'quota' %}">Quota Request Result</a>
+        <br>
+        <a href="{% url 'index' %}">Back to HOME</a>
+        
+      </ul>
+    </nav>
+    <article>
+        <h1 align="center">Course List:</h1>
+        <table style="width:50%" align="center">
+            <thead>
+                <tr align="center">
+        
+                    <td>Code</td>
+                    <td>Course Title</td>
+                    <td>Semester</td>
+                    <td>Year</td>
+                    <td>Seat</td>
+                    <td>Status</td>
+                    <td>Proceed</td>
+                </tr>
+            </thead>
+            {% for course in courses %}
+        
+            <tbody>
+                <tr align="center">
+                    <td>{{ course.c_id }}</td>
+                    <td>{{ course.title }}</td>
+                    <td>{{ course.semmester}}</td>
+                    <td>{{ course.year }}</td>
+                    <td>{{ course.seat_count }} / {{course.max_seat}}</td>
+                    <td> {% if course.quota %}
+                          available
+                          {% else %}
+                          not available
+                          {% endif %} 
+                    </td>
+                    <td><a href="{% url 'course' course.id %}">view details</a>
+                  </td>
+                    
+                    </form>
+                </tr>
+            </tbody>
+            {% endfor %}
+        
+        </table>
+        
+    </article>
+    
+  </section>
+{% endblock %}
