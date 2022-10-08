@@ -1,4 +1,3 @@
-from ssl import AlertDescription
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -26,10 +25,12 @@ def course(request, id):
 
 def book(request, id):
     course = Course.objects.get(pk=id)
+    if course.attend.count() >= course.max_seat:
+        course.quota = False
     if course.quota == True :
         course.attend.add(request.user)
         course.seat_count = course.attend.count()
-        if course.seat_count == course.max_seat:
-            course.quota = False
-        course.save()
+    if course.seat_count == course.max_seat:
+        course.quota = False
+    course.save()
     return HttpResponseRedirect(reverse('quota'))

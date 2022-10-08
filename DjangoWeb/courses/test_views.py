@@ -15,7 +15,7 @@ class CourseViewTestCase(TestCase):
         password_p = make_password('pangpassword')
         user_k = User.objects.create(username='krit', password=password_k)
         user_p = User.objects.create(username='pang', password=password_p)
-        course1 = Course.objects.create(c_id="test1")
+        course1 = Course.objects.create(c_id="test1", max_seat = 1)
         course2 = Course.objects.create(c_id="test2")
         course1.attend.add(user_k)
         course2.attend.add(user_p)
@@ -53,7 +53,7 @@ class CourseViewTestCase(TestCase):
     def test_cannot_book_nonavailable_seat_course(self):
         """ cannot book full max seat course"""
 
-        self.client.login(username='krit', password='kritpassword')
+        self.client.login(username='pang', password='pangpassword')
         f = Course.objects.first()
         f.max_seat = 1
         f.save()
