@@ -73,6 +73,6 @@ class CourseViewTestCase(TestCase):
         self.client.login(username='pang', password='pangpassword')
         course = Course.objects.get(c_id='test1')
         course.max_seat=2
-        response = self.client.get(reverse('book', args=(course.id,)))
+        self.client.get(reverse('book', args=(course.id,)))
         course.refresh_from_db()
         self.assertEqual(course.quota, False)
